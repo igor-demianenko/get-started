@@ -1,5 +1,104 @@
 <meta charset="utf-8">
-<script>
+<!-- Массивы на примере игры BlackJack -->
+<script type="text/javascript">
+    var arr = []; // массив со списком генераций чисел
+    var arr_color = []; // массив со списком генераций чисел
+    var rounds = 1000000; // количество раундов генерации
+    var zeros = 0; // условие выйгрыша
+    var check_color = 0;
+    var i = 0; // счетчик генераций числа
+    var max_length_red = 0; // счетчик для вычисления последовательности красных
+    var max_length_black = 0; // счетчик для вычисления последовательности черных
+    var max_length_zero = 0; // счетчик для вычисления последовательности зеро
+
+    for(i=0; i<=rounds; i++) {
+        arr.push(check_color = Math.round(Math.random()*36)); // генерация чисел 0-36
+        if (check_color != 0) {
+            check_color = (check_color % 2) * 2 - 1; // вычисление черного и красного
+        }
+        arr_color.push(check_color)
+    }
+
+    //alert("Итоги генерации:\n" + arr);
+    //alert("Итоги генерации:\n" + arr_color);
+
+    for(i=0; i<arr.length; i++) {
+        if (arr[i] == 0) {
+            zeros++;
+        }
+    }
+
+    alert("Число выпадения зеро: " + zeros/arr.length*100 + "%");
+
+    for (i=0; i<arr_color.length; i++){
+        if (arr_color[i] == 1) { // начало вычисления кол-ва выпадения красных чисел
+            var length_red = 0;
+            while(i < arr_color.length && arr_color[i] == 1) {
+                i++;
+                length_red++;
+            }
+            if (length_red > max_length_red){
+                max_length_red = length_red;
+            }
+        }
+        else if (arr_color[i] == -1) {
+            var length_black = 0; // начало вычисления кол-ва выпадения черных чисел
+            while(i < arr_color.length && arr_color[i] == -1) {
+                i++;
+                length_black++;
+            }
+            if (length_black > max_length_black){
+                max_length_black = length_black;
+            }
+        }
+        else if (arr_color[i] == 0) {
+            var length_zero = 0; // начало вычисления кол-ва выпадения зеро
+            while(i < arr_color.length && arr_color[i] == 0) {
+                i++;
+                length_zero++;
+            }
+            if (length_zero > max_length_zero){
+                max_length_zero = length_zero;
+            }
+        }
+    }
+    alert("Самая длинная последовательность красного: " + max_length_red + ".\nСамая длинная последовательность черного: " + max_length_black + ".\nСамая длинная последовательность зеро: " + max_length_zero);
+</script>
+
+
+<!-- Цикл for на примере калькулятора вклада-->
+<script type="text/javascript">
+    var sum_vklada = parseInt(prompt("Введите сумму вклада в рублях: "));
+    var percent_vklada = parseInt(prompt("Введите годовую процентную ставку: "));
+    var srok_vklada = parseInt(prompt("Введите срок вклада в годах: "));
+    for (var year_count=1; year_count<=srok_vklada; year_count++) {
+        sum_vklada = sum_vklada + sum_vklada * (percent_vklada / 100);
+        alert("После " + year_count + " года, сумма на счете вклада составит: " + Math.floor(sum_vklada) + " рублей.");
+    }
+</script>
+
+
+<!-- Цикл while на примере игры "Русская рулетка"  -->
+<script type="text/javascript">
+    var n = 1;
+    var answer_a = prompt("Хотите сыграть в Русскую рулетку?\n1 - [Да]\n2 - [Нет]");
+
+    if (answer_a == "1") {
+        do {
+            if ((Math.random() * 6) < 1){
+                alert("финита ля комедия.. доигрались!")
+                break
+            } 
+            n++;
+        } while(prompt("Тебе повезло целых " + (n - 1) +" раза!\nСыграем ещё?\n1 - [Да]\n2 - [Нет]") == "1");
+    
+        alert("Игра завершена на " + n + " раунде.");
+    } 
+</script>
+
+
+<!-- Оператор if на примере игры-загадки -->
+<script type="text/javascript">
     var answer_count = 0;
     var answer_a = prompt("Зимой и летом одним цветом..");
     if (answer_a == "елка") {
@@ -16,7 +115,11 @@
         alert("неверно!");
     }
     alert("У тебя " + answer_count + " правильных ответа!")
+</script>
 
+
+<!-- Оператор if на примере игры "Попади в цель!" -->
+<script type="text/javascript">
     alert("Поиграем в игру 'Попади в цель!'\nУкажите число в диапазоне от 1 до 100")
     var aim1 = 19; //цель 1
     var aim2 = 56; //цель 2
@@ -27,5 +130,4 @@
         prompt("Отлично! Ты поразил цель!");
     } else
         prompt("Промазал!")
-
 </script>
