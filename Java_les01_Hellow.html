@@ -1,0 +1,31 @@
+<meta charset="utf-8">
+<script>
+    var answer_count = 0;
+    var answer_a = prompt("Зимой и летом одним цветом..");
+    if (answer_a == "елка") {
+        alert("Верно! :)");
+        answer_count = answer_count + 1;
+    } else {
+        alert("неверно!");
+    }
+    var answer_b = prompt("Тихо сздади подошел, дважды всунул и пошел..");
+    if (answer_b == "тапочки") {
+        alert("Угадал! :)");
+        answer_count = answer_count + 1;
+    } else {
+        alert("неверно!");
+    }
+    alert("У тебя " + answer_count + " правильных ответа!")
+
+    alert("Поиграем в игру 'Попади в цель!'\nУкажите число в диапазоне от 1 до 100")
+    var aim1 = 19; //цель 1
+    var aim2 = 56; //цель 2
+    var shot = parseInt(prompt("Сделайте свой первый выстрел!"));
+    if (shot <= 0 || shot >= 101) {
+        prompt("\nВнимальнее! Для игры необходимо указывать значение от 1 до 100!");
+    } else if (((shot >= 14) && (shot <= 24)) || ((shot <= 61) && (shot >= 51))) {
+        prompt("Отлично! Ты поразил цель!");
+    } else
+        prompt("Промазал!")
+
+</script>
