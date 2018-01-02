@@ -1,4 +1,109 @@
 <meta charset="utf-8">
+<!-- Функции на примере игры Black Jack -->
+<script type="text/javascript">
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    function getCard() {
+        var cards = ["6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+        return cards[getRandomInt(0, cards.length -1)];
+    }
+
+    function getSum(arr_player) {
+        var player_sum = 0;
+        for (i=0; i<=arr_player.length; i++){
+        if (arr_player[i] == 6) { 
+            player_sum = player_sum + 6;
+        }
+        if (arr_player[i] == 7) { 
+            player_sum = player_sum + 7;
+        }  
+        if (arr_player[i] == 8) { 
+            player_sum = player_sum + 8;
+        }
+        if (arr_player[i] == 9) { 
+            player_sum = player_sum + 9;
+        }
+        if (arr_player[i] == 10) { 
+            player_sum = player_sum + 10;
+        }
+        if (arr_player[i] == "J") { 
+            player_sum = player_sum + 10;
+        }
+        if (arr_player[i] == "Q") { 
+            player_sum = player_sum + 10;
+        }
+        if (arr_player[i] == "K") { 
+            player_sum = player_sum + 10;
+        }
+        if (arr_player[i] == "A") { 
+            if (player_sum <= 10)
+            player_sum = player_sum + 11;
+            else if (player_sum > 10) {
+            player_sum = player_sum + 1;    
+            }
+        }
+
+        }
+        return player_sum;
+    }
+
+    function getStatus(){
+        return "Рука дилера (крупье): " + dealer.join(" и ") + "  (" + getSum(dealer) + " очков)" + "\nРука игрок: " + player.join(" и ")  + "  (" + getSum(player) + " очков)"
+    }
+
+    var dealer = [getCard()];
+    var player = [getCard(), getCard()];
+    var answer = "";
+
+    // Раздача дополнительных карты
+    if (getSum(player) == 21){ // Проверка на случай если у игрока уже BlackJack
+        alert("Дьявольское везенье! BlackJack на раздаче! :)");
+    } else { // Иначе раздаем карты
+        do { 
+            answer = prompt(getStatus() + "\n\nХотите ещё карту?\n1 - [Да]\n2 - [Нет]");
+            if (answer == "1") {
+                player.push(getCard());
+                if (getSum(player) > 21){
+                    break   
+                }
+                else if (getSum(player) == 21){
+                    break
+                }
+            } else { // диллер начинает набирать карты
+                while (getSum(dealer) < 17) {
+                    dealer.push(getCard());
+                }
+            }
+            // если запросил пользователь повторяем вопрос 
+        }   while(answer == "1");
+    }
+    // Подведение итогов игры
+    if (getSum(player) == 21) {
+        alert(getStatus() + "\n\nПоздравляем! У вас " + getSum(player) + " очко, вы выиграли!");
+    }
+    else if (getSum(player) > 21){
+        alert(getStatus() + "\n\nУ вас перебор..");
+    }
+    else if (getSum(dealer) == 21){
+        alert(getStatus() + "\n\nУ диллера BlackJack!");
+    }
+    else if (getSum(dealer) == getSum(player)){
+        alert(getStatus() + "\n\nНичья о_0");
+    }
+    else if (getSum(dealer) > 21 && getSum(player) < 21){
+        alert(getStatus() + "\n\nУ диллера перебор.. Вы выиграли!");
+    }
+    else if (getSum(player) > getSum(dealer)){
+    alert(getStatus() + "\n\nВы выиграли по очкам!");
+    }
+    else {
+    alert(getStatus() + "\n\nВы проиграли по очкам!");
+    }
+</script>
+
+
 <!-- Массивы на примере игры BlackJack -->
 <script type="text/javascript">
     var arr = []; // массив со списком генераций чисел
@@ -114,20 +219,20 @@
     } else {
         alert("неверно!");
     }
-    alert("У тебя " + answer_count + " правильных ответа!")
+    alert("У тебя " + answer_count + " правильных ответа!");
 </script>
 
 
 <!-- Оператор if на примере игры "Попади в цель!" -->
 <script type="text/javascript">
-    alert("Поиграем в игру 'Попади в цель!'\nУкажите число в диапазоне от 1 до 100")
+    alert("Поиграем в игру 'Попади в цель!'\nУкажите число в диапазоне от 1 до 100");
     var aim1 = 19; //цель 1
     var aim2 = 56; //цель 2
     var shot = parseInt(prompt("Сделайте свой первый выстрел!"));
     if (shot <= 0 || shot >= 101) {
         prompt("\nВнимальнее! Для игры необходимо указывать значение от 1 до 100!");
     } else if (((shot >= 14) && (shot <= 24)) || ((shot <= 61) && (shot >= 51))) {
-        prompt("Отлично! Ты поразил цель!");
+        alert("Отлично! Ты поразил цель!");
     } else
-        prompt("Промазал!")
+        alert("Промазал!");
 </script>
